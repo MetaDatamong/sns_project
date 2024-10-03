@@ -16,12 +16,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long userId;
 
-    private String userName;
+    @Column(unique = true, length = 20)
+    private String username;
+
+    @Column(nullable = false)
     private String password;
+
     private String birthday;
+
+    @Column(nullable = false)
     private String nickname;
     private Sex sex;
-    private Authority authority;
+    private String role;
 
     public enum Sex {
         MALE("남"),
@@ -38,9 +44,5 @@ public class User {
         }
     }
 
-    public enum Authority {
-        GENERAL,
-        ADMIN;
-    }
 
 }
