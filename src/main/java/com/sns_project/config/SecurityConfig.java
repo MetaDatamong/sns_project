@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity // 해당 파일로 시큐리티를 활성화
 @Configuration // IoC
@@ -15,7 +16,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
+/*    @Bean
     public  SecurityFilterChain  filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
@@ -27,6 +28,26 @@ public class SecurityConfig {
         http.formLogin()
                 .loginPage("/auth/signin")
                 .defaultSuccessUrl("/");
+
+        return http.build();
+    }*/
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf((csrf) -> csrf.disable())
+                .authorizeHttpRequests((authz) -> authz
+                        .requestMatchers(new AntPathRequestMatcher("/")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/user/**")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/image/**")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/subscribe/**")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/comment/**")).authenticated()
+                        .anyRequest().permitAll()
+                )
+                .formLogin((form) -> form
+                        .loginPage("/auth/signin")
+                        .defaultSuccessUrl("/")
+                );
 
         return http.build();
     }

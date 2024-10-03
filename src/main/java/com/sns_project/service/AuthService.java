@@ -14,7 +14,7 @@ public class AuthService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional // Write(Insert, Update, Delete)
-    public User singUp(User user) throws RuntimeException {
+    public User singUp(User user)  {
         // 회원가입 진행
         String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
