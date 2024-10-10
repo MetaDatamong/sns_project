@@ -26,8 +26,12 @@ public class User {
 
     @Column(nullable = false)
     private String nickname;
-    private Sex sex;
+    private String sex;
     private String role;
+
+/*    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "sex_enum")
+    private Sex sex;
 
     public enum Sex {
         MALE("남"),
@@ -42,7 +46,7 @@ public class User {
         public String getValue() { // Enum 상수 값을 불러오기 위한 메소드
             return message;
         }
-    }
+    }*/
 
 
 }

@@ -9,6 +9,7 @@ public class SignupDto {
     private String password;
     private String birthday;
     private String nickname;
+    private String sex;
 
     public User toEntity() {
         return User.builder()
@@ -16,6 +17,7 @@ public class SignupDto {
                 .password(password)
                 .birthday(birthday)
                 .nickname(nickname)
+                .sex(sex)
                 .build();
     }
 }
