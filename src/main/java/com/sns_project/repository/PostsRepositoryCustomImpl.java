@@ -21,7 +21,7 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom {
     }
 
     @Override
-    public Page<Posts> mStory(Long principalId, Pageable pageable) {
+    public Page<Posts> rPosts(Long principalId, Pageable pageable) {
         QPosts posts = QPosts.posts;
         QFriend friend = QFriend.friend;
 
@@ -29,10 +29,11 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom {
                 .selectFrom(posts)
                 .where(posts.userId.in(
                         JPAExpressions
-                                .select(friend.friendId)
+                                .select(friend.userFriendId)
                                 .from(friend)
                                 .where(friend.userId.eq(principalId))
-                ))
+                ).or(posts.userId.eq(principalId))
+                )
                 .orderBy(posts.postingId.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -43,10 +44,11 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom {
                 .from(posts)
                 .where(posts.userId.in(
                         JPAExpressions
-                                .select(friend.friendId)
+                                .select(friend.userFriendId)
                                 .from(friend)
                                 .where(friend.userId.eq(principalId))
-                ))
+                ).or(posts.userId.eq(principalId))
+                )
                 .fetchOne();
 
         return new PageImpl<>(content, pageable, total);

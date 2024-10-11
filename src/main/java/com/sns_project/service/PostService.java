@@ -16,8 +16,8 @@ public class PostService {
     @Autowired
     PostsRepository postsRepository;
 
-    @Transactional(readOnly = true)
+/*    @Transactional(readOnly = true)
     public List<Posts> popularPosts() {
         return postsRepository.mStory();
-    }
+    }*/
 }

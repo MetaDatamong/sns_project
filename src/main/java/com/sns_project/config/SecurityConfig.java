@@ -39,14 +39,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers(new AntPathRequestMatcher("/")).authenticated()
                         .requestMatchers(new AntPathRequestMatcher("/user/**")).authenticated()
-                        .requestMatchers(new AntPathRequestMatcher("/image/**")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/posting/**")).authenticated()
                         .requestMatchers(new AntPathRequestMatcher("/subscribe/**")).authenticated()
                         .requestMatchers(new AntPathRequestMatcher("/comment/**")).authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin((form) -> form
                         .loginPage("/auth/signin")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/posting")
                 );
 
         return http.build();
