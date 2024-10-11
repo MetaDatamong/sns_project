@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photogram</title>
+    <title>Mingram</title>
 
     <!-- 제이쿼리 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -26,7 +26,9 @@
 <body>
 
 <!-- principalId 담아두는 곳 -->
-<input type="hidden" id="principalId" value="{{principal.user.id}}" />
+{{#principal}}
+    <input type="hidden" id="principalId" value="{{user.userId}}">
+{{/principal}}
 
 <header class="header">
     <div class="container">
@@ -41,10 +43,13 @@
                 <li class="navi-item"><a href="/image/popular">
                     <i class="far fa-compass"></i>
                 </a></li>
-                <li class="navi-item"><a href="/user/{{principal.user.id}}">
+                <li class="navi-item"><a href="/user/{{principal.user.userId}}">
                     <i class="far fa-user"></i>
                 </a></li>
             </ul>
         </nav>
     </div>
 </header>
+
+</body>
+</html>

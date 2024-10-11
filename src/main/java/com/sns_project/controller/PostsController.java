@@ -1,6 +1,7 @@
 package com.sns_project.controller;
 
 import com.sns_project.domain.Posts;
+import com.sns_project.domain.User;
 import com.sns_project.repository.PostsRepository;
 import com.sns_project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,6 +23,26 @@ public class PostsController {
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
 
+    @GetMapping("/posting")
+    public String getPosting(@AuthenticationPrincipal UserDetails userDetails, Model model, Pageable pageable) {
+        if (userDetails != null) {
+            String username = userDetails.getUsername();
+            User user = userRepository.findByUsername(username);
+            model.addAttribute("principal", userDetails);  // User 객체 전체를 전달
+
+            Long principalId = user.getUserId();
+            Page<Posts> posts = postsRepository.rPosts(principalId, pageable);
+            model.addAttribute("posts", posts);
+        }
+
+        if (pageable.getPageNumber() == 0) {
+            return "image/story";  // 첫 페이지일 때 전체 페이지 반환
+        } else {
+            return "image/story :: #storyList";  // 부분 업데이트를 위한 fragment 반환
+        }
+    }
+
+
     /*    @GetMapping("/posting")
     public String getPosting(int principalId, Pageable pageable) {
         // api는 데이터를 리턴하는 서버!!
@@ -33,7 +55,7 @@ public class PostsController {
         return "auth/signin";
     }*/
 
-    @GetMapping("/posting")
+   /* @GetMapping("/posting")
     @ResponseBody
     public String getPosting(@AuthenticationPrincipal UserDetails userDetails, Pageable pageable) {
 
@@ -65,7 +87,7 @@ public class PostsController {
         response.append("</body></html>");
 
         return response.toString();
-    }
+    }*/
 
 
   /*  @GetMapping(value = {"", "/"})

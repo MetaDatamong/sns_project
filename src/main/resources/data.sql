@@ -2,9 +2,9 @@
 
 INSERT INTO users (user_id, birthday, nickname, password, role, sex, username)
 VALUES
-    (1, '1990-01-01', '사용자1', '$2a$10$9O.xSaZ4AV.CGqEsX2BDquz2bU7ADypJrR5Nd2OmJYeQDnFSlWJWi', 'USER', '남성', '11'),
-    (2, '1992-05-15', '사용자2', '$2a$10$crs62DcQkddEO.JfnBHEl.hru/huw15oM5WOj5qAL65Dns.UfPsYa', 'USER', '여성', '22'),
-    (3, '1988-11-30', '사용자3', '$2a$10$riXcMcUBKGVHopHUPy0LoerWgAiAk7nw9q6jzljqOaetAkunZSBq.', 'USER', '남성', '33');
+    (1, '1990-01-01', 'gurumi', '$2a$10$9O.xSaZ4AV.CGqEsX2BDquz2bU7ADypJrR5Nd2OmJYeQDnFSlWJWi', 'USER', '남성', '11'),
+    (2, '1992-05-15', 'bassMaster', '$2a$10$crs62DcQkddEO.JfnBHEl.hru/huw15oM5WOj5qAL65Dns.UfPsYa', 'USER', '여성', '22'),
+    (3, '1988-11-30', 'vitamin', '$2a$10$riXcMcUBKGVHopHUPy0LoerWgAiAk7nw9q6jzljqOaetAkunZSBq.', 'USER', '남성', '33');
 
 
 -- Friend 테이블 데이터

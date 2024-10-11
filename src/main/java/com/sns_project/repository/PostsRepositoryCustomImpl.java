@@ -27,12 +27,12 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom {
 
         List<Posts> content = queryFactory
                 .selectFrom(posts)
-                .where(posts.userId.in(
+                .where(posts.user.userId.in(
                         JPAExpressions
                                 .select(friend.userFriendId)
                                 .from(friend)
                                 .where(friend.userId.eq(principalId))
-                ).or(posts.userId.eq(principalId))
+                ).or(posts.user.userId.eq(principalId))
                 )
                 .orderBy(posts.postingId.desc())
                 .offset(pageable.getOffset())
@@ -42,12 +42,12 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom {
         long total = queryFactory
                 .select(posts.count())
                 .from(posts)
-                .where(posts.userId.in(
+                .where(posts.user.userId.in(
                         JPAExpressions
                                 .select(friend.userFriendId)
                                 .from(friend)
                                 .where(friend.userId.eq(principalId))
-                ).or(posts.userId.eq(principalId))
+                ).or(posts.user.userId.eq(principalId))
                 )
                 .fetchOne();
 

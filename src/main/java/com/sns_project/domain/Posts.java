@@ -22,8 +22,12 @@ public class Posts {
     private SharingScope sharingScope;
     private String postImageUrl;
 
-    @Column(name = "author")
-    private Long userId;
+/*    @Column(name = "author")
+    private Long userId;*/
+
+    @JoinColumn(name = "author")
+    @ManyToOne(fetch = FetchType.EAGER) // 이미지를 select하면 조인해서 User정보를 같이 들고옴
+    private User user;
 
     @Transient // DB에 칼럼이 만들어지지 않는다.
     private boolean likeState;
