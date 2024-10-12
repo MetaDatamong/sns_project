@@ -1,19 +1,29 @@
 package com.sns_project.controller;
 
+import com.sns_project.config.auth.PrincipalDetails;
 import com.sns_project.domain.Posts;
 import com.sns_project.domain.User;
+import com.sns_project.dto.PostsDto;
+import com.sns_project.handler.CustomValidationException;
 import com.sns_project.repository.PostsRepository;
 import com.sns_project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,7 +33,7 @@ public class PostsController {
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
 
-    @GetMapping("/posting")
+    @GetMapping({"/posting", ","})
     public String getPosting(@AuthenticationPrincipal UserDetails userDetails, Model model, Pageable pageable) {
         if (userDetails != null) {
             String username = userDetails.getUsername();
@@ -42,6 +52,44 @@ public class PostsController {
         }
     }
 
+    // 참고한 코드는 그냥  url 요청하면 자동으로 userDetail이 넘어가던데,,,, 참고한 코드 작동원리를 다시 살펴보기/
+
+    @GetMapping("/posting/upload")
+    public String upload(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        model.addAttribute("principal", userDetails);
+        return "image/upload";
+    }
+
+    @PostMapping("/posting")
+    public String imageUpload(PostsDto postsDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+        // 깍둑이
+        if(postsDto.getFile().isEmpty()) {
+            throw new CustomValidationException("이미지가 첨부되지 않았습니다.", null);
+        }
+        //application.yml 파일 사용 시 사용. file 경로를 지정하면,,,  난 일단 그냥 String으로 경로를 고정시켜둠.
+        /*@Value("${file.path}")
+        private String uploadFolder;*/
+        String uploadFolder = "C:/workspace/springbootwork/upload/";
+
+        UUID uuid = UUID.randomUUID(); // uuid
+        String imageFileName = uuid+"_"+postsDto.getFile().getOriginalFilename(); // 1.jpg
+        System.out.println("이미지 파일이름 : "+imageFileName);
+
+        Path imageFilePath = Paths.get(uploadFolder+imageFileName);
+
+        // 통신, I/O -> 예외가 발생할 수 있다.
+        try {
+            Files.write(imageFilePath, postsDto.getFile().getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // image 테이블에 저장
+        Posts  posts = postsDto.toEntity(imageFileName, principalDetails.getUser()); // 5cf6237d-c404-43e5-836b-e55413ed0e49_bag.jpeg
+        postsRepository.save(posts);
+        return "redirect:/";
+    }
 
     /*    @GetMapping("/posting")
     public String getPosting(int principalId, Pageable pageable) {

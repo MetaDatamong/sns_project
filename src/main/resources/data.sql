@@ -17,7 +17,7 @@ VALUES
 
 -- posts 테이블 데이터
 
-INSERT INTO posts (posting_id, content, date_time, post_image_url, sharing_scope, author)
+/*INSERT INTO posts (posting_id, content, date_time, post_image_url, sharing_scope, author)
 VALUES
 -- 사용자 1의 게시물
 (1, '오늘은 날씨가 정말 좋네요. 공원에서 산책하기 좋은 날입니다.', '2023-03-15 10:00:00', 'https://example.com/images/park.jpg', 0, 1),
@@ -32,4 +32,4 @@ VALUES
 -- 사용자 3의 게시물
 (7, '새로운 취미로 기타를 배우기 시작했습니다.', '2023-03-21 13:00:00', 'https://example.com/images/guitar.jpg', 0, 3),
 (8, '오늘 본 영화 정말 감동적이었어요. 추천합니다!', '2023-03-22 22:00:00', 'https://example.com/images/movie.jpg', 1, 3),
-(9, '드디어 오랫동안 준비한 마라톤 대회에 참가했어요.', '2023-03-23 18:30:00', 'https://example.com/images/marathon.jpg', 2, 3);
+(9, '드디어 오랫동안 준비한 마라톤 대회에 참가했어요.', '2023-03-23 18:30:00', 'https://example.com/images/marathon.jpg', 2, 3);*/
