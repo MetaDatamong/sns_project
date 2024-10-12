@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom {
     public PostsRepositoryCustomImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
+
+
 
     @Override
     public Page<Posts> rPosts(Long principalId, Pageable pageable) {
@@ -31,7 +34,7 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom {
                         JPAExpressions
                                 .select(friend.userFriendId)
                                 .from(friend)
-                                .where(friend.userId.eq(principalId))
+                                .where(friend.userId.eq(principalId).and(posts.sharingScope.in("PUBLIC","FRIENDS_ONLY")))
                 ).or(posts.user.userId.eq(principalId))
                 )
                 .orderBy(posts.postingId.desc())

@@ -7,6 +7,7 @@ import com.sns_project.dto.PostsDto;
 import com.sns_project.handler.CustomValidationException;
 import com.sns_project.repository.PostsRepository;
 import com.sns_project.repository.UserRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,6 +33,12 @@ public class PostsController {
 
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
+
+    // 나중에 서비스 단으로 빼자.
+    @PostConstruct
+    public void synchronizeSequences() {
+        postsRepository.synchronizeSequence();
+    }
 
     @GetMapping({"/posting", "/"})
     public String getPosting(@AuthenticationPrincipal UserDetails userDetails, Model model, Pageable pageable) {

@@ -24,6 +24,12 @@
             <!--사진설명 + 업로드버튼-->
             <div class="upload-form-detail">
                 <input type="text" placeholder="사진설명" name="content" />
+                <select name="sharingScope" required="required">
+                    <option value="">공개 범위</option>
+                    <option value="PUBLIC">공개</option>
+                    <option value="PRIVATE">비공개</option>
+                    <option value="FRIENDS_ONLY">친구에게 공개</option>
+                </select>
                 <button class="cta blue">업로드</button>
             </div>
             <!--사진설명end-->

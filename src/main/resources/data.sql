@@ -17,14 +17,13 @@ VALUES
 
 -- posts 테이블 데이터
 
-/*INSERT INTO posts (posting_id, content, date_time, post_image_url, sharing_scope, author)
+INSERT INTO posts (posting_id, content, date_time, post_image_url, sharing_scope, author)
 VALUES
--- 사용자 1의 게시물
-(1, '오늘은 날씨가 정말 좋네요. 공원에서 산책하기 좋은 날입니다.', '2023-03-15 10:00:00', 'https://example.com/images/park.jpg', 0, 1),
-(2, '새로운 요리 레시피를 시도해봤어요. 여러분도 한번 해보세요!', '2023-03-16 14:30:00', 'https://example.com/images/recipe.jpg', 1, 1),
-(3, '오랜만에 친구들과 만나 즐거운 시간을 보냈습니다.', '2023-03-17 20:00:00', 'https://example.com/images/friends.jpg', 2, 1),
+    (1, '11', '2024-10-12 20:30:07.563943', '7f9a824c-1d10-4f55-98da-d8f45dd57251_즐길다.png', 'PUBLIC', 1),
+    (2, '웃음', '2024-10-12 20:30:23.351174', 'c0cde228-7a80-464c-ac47-b39a76e59963_이미지1.png', 'PRIVATE', 1),
+    (3, '공원감', '2024-10-12 20:30:38.759259', '9c56e0be-fa77-40dc-8385-2e5749d5ad4d_이미지2.jfif', 'FRIENDS_ONLY', 1);
 
--- 사용자 2의 게시물
+/*-- 사용자 2의 게시물
 (4, '새 책을 샀어요. 이번 주말에 읽을 예정입니다.', '2023-03-18 09:15:00', 'https://example.com/images/book.jpg', 0, 2),
 (5, '회사 프로젝트가 성공적으로 마무리되었습니다!', '2023-03-19 17:45:00', 'https://example.com/images/project.jpg', 1, 2),
 (6, '가족과 함께한 주말 여행, 정말 좋았어요.', '2023-03-20 11:30:00', 'https://example.com/images/trip.jpg', 2, 2),

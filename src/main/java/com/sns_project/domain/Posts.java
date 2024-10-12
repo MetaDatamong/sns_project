@@ -13,13 +13,14 @@ import java.time.LocalDateTime;
 @Setter
 public class Posts {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "your_entity_seq")
+    @SequenceGenerator(name = "your_entity_seq", sequenceName = "your_entity_sequence", allocationSize = 1, initialValue = 4)
     private Long postingId;
 
     //private String title;
     private String content;
     private LocalDateTime dateTime;
-    private SharingScope sharingScope;
+    private String sharingScope;
     private String postImageUrl;
 
 /*    @Column(name = "author")
@@ -40,9 +41,9 @@ public class Posts {
         this.dateTime = LocalDateTime.now();
     }
 
-    public enum SharingScope {
+/*    public enum SharingScope {
         PUBLIC,
         PRIVATE,
         FRIENDS_ONLY;
-    }
+    }*/
 }
