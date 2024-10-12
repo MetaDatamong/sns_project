@@ -33,7 +33,7 @@ public class PostsController {
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
 
-    @GetMapping({"/posting", ","})
+    @GetMapping({"/posting", "/"})
     public String getPosting(@AuthenticationPrincipal UserDetails userDetails, Model model, Pageable pageable) {
         if (userDetails != null) {
             String username = userDetails.getUsername();
@@ -70,7 +70,7 @@ public class PostsController {
         //application.yml 파일 사용 시 사용. file 경로를 지정하면,,,  난 일단 그냥 String으로 경로를 고정시켜둠.
         /*@Value("${file.path}")
         private String uploadFolder;*/
-        String uploadFolder = "C:/workspace/springbootwork/upload/";
+        String uploadFolder = "C:/Users/JOOSE/Documents/sns_project/src/main/resources/static/upload/";
 
         UUID uuid = UUID.randomUUID(); // uuid
         String imageFileName = uuid+"_"+postsDto.getFile().getOriginalFilename(); // 1.jpg
