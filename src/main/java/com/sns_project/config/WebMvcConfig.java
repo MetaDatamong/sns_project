@@ -12,7 +12,7 @@ public class WebMvcConfig implements WebMvcConfigurer{ // web 설정 파일
     /*@Value("${file.path}")
     private String uploadFolder;*/
 
-    private String uploadFolder = "C:/Users/JOOSE/Documents/sns_project/src/main/resources/static/upload/";
+    private String uploadFolder = "C:/sns_project/src/main/resources/static/upload/";
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

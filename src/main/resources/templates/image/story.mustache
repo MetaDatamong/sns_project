@@ -10,25 +10,34 @@
                         <div>
                             <img class="profile-image" src="/images/person.jpeg" />
                         </div>
-                        <div>{{user.nickname}}</div>
+                        <div>{{post.user.nickname}}</div>
+                        {{#isAuthor}}
+                            <div class="post-options">
+                                <button class="post-options-button">...</button>
+                                <div class="post-options-dropdown" style="display: none;">
+                                    <a href="/post/{{post.postingId}}/edit" class="dropdown-item">수정</a>
+                                    <a href="#" onclick="deletePost({{post.postingId}})" class="dropdown-item">삭제</a>
+                                </div>
+                            </div>
+                        {{/isAuthor}}
                     </div>
                     <div class="sl__item__img">
-                        <img src="/upload/{{postImageUrl}}" alt="">
+                        <img src="/upload/{{post.postImageUrl}}" alt="">
                     </div>
                     <div class="sl__item__contents">
                         <div class="sl__item__contents__icon">
-                            <form id="likeForm-{{postingId}}" action="/post/{{postingId}}/like" method="POST">
-                                <button type="button" class="like-button" data-posting-id="{{postingId}}">
-                                    <i class="far fa-heart" id="storyLikeIcon-{{postingId}}"></i>
+                            <form id="likeForm-{{post.postingId}}" action="/post/{{post.postingId}}/like" method="POST">
+                                <button type="button" class="like-button" data-posting-id="{{post.postingId}}">
+                                    <i class="far fa-heart" id="storyLikeIcon-{{post.postingId}}"></i>
                                 </button>
                             </form>
                         </div>
-                        <span class="like"><b id="storyLikeCount-{{postingId}}">{{likeCount}} </b>likes</span>
+                        <span class="like"><b id="storyLikeCount-{{post.postingId}}">{{post.likeCount}} </b>likes</span>
                         <div class="sl__item__contents__content">
-                            <p>{{content}}</p>
+                            <p>{{post.content}}</p>
                         </div>
-                        <div id="storyCommentList-{{postingId}}">
-                            {{#comments}}
+                        <div id="storyCommentList-{{post.postingId}}">
+                            {{#post.comments}}
                                 <div class="sl__item__contents__comment" id="storyCommentItem-{{id}}">
                                     <p>
                                         <b>{{user.userId}} :</b> {{content}}
@@ -39,12 +48,12 @@
                                         </button>
                                     </form>
                                 </div>
-                            {{/comments}}
+                            {{/post.comments}}
                         </div>
                         <div class="sl__item__input">
-                            <form id="commentForm-{{postingId}}" action="/post/{{postingId}}/comment" method="POST">
-                                <input type="text" name="content" placeholder="댓글 달기..." id="storyCommentInput-{{postingId}}" class="comment-input" data-posting-id="{{postingId}}">
-                                <button type="button" class="comment-submit" data-posting-id="{{postingId}}">게시</button>
+                            <form id="commentForm-{{post.postingId}}" action="/post/{{post.postingId}}/comment" method="POST">
+                                <input type="text" name="content" placeholder="댓글 달기..." id="storyCommentInput-{{post.postingId}}" class="comment-input" data-posting-id="{{post.postingId}}">
+                                <button type="button" class="comment-submit" data-posting-id="{{post.postingId}}">게시</button>
                             </form>
                         </div>
                     </div>
@@ -56,7 +65,7 @@
 
 {{#posts.hasNext}}
     <div id="load-more-container" style="text-align: center; margin-top: 20px;">
-        <button onclick="loadMoreStories()" id="load-more-button">더 보기</button>
+        <a href="/posting?page={{currentPage}}" class="load-more-button">더 보기</a>
     </div>
 {{/posts.hasNext}}
 

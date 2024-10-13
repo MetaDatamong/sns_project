@@ -18,12 +18,12 @@
         <form class="upload-form" action="/posting" method="post" enctype="multipart/form-data">
             <input type="file" name="file" onchange="imageChoose(this)" />
             <div class="upload-img">
-                <img src="/images/basic.jpeg" alt="" id="imageUploadPreview" />
+                <img src="/images/person.jpeg" alt="" id="imageUploadPreview" />
             </div>
 
             <!--사진설명 + 업로드버튼-->
             <div class="upload-form-detail">
-                <input type="text" placeholder="내용을 입력하세요." name="content" />
+                <input type="text" placeholder="사진설명" name="content" />
                 <select name="sharingScope" required="required">
                     <option value="">공개 범위</option>
                     <option value="PUBLIC">공개</option>

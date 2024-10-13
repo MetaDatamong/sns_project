@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,21 +47,34 @@ public class PostsController {
 
     @GetMapping({"/posting", "/"})
     public String getPosting(@AuthenticationPrincipal UserDetails userDetails, Model model, Pageable pageable) {
+
+        //  posting 을 가져오는 부분
         if (userDetails != null) {
             String username = userDetails.getUsername();
             User user = userRepository.findByUsername(username);
-            model.addAttribute("principal", userDetails);  // User 객체 전체를 전달
-
             Long principalId = user.getUserId();
-            Page<Posts> posts = postsRepository.rPosts(principalId, pageable);
-            model.addAttribute("posts", posts);
+
+            Page<Posts> postsPage = postsRepository.rPosts(principalId, pageable);
+
+            List<Map<String, Object>> postsWithAuthorFlag = postsPage.getContent().stream()
+                    .map(post -> {
+                        Map<String, Object> postMap = new HashMap<>();
+                        postMap.put("post", post);
+                        postMap.put("isAuthor", post.getUser().getUserId().equals(principalId));
+                        return postMap;
+                    })
+                    .collect(Collectors.toList());
+
+            Page<Map<String, Object>> postsPageWithAuthorFlag = new PageImpl<>(postsWithAuthorFlag, pageable, postsPage.getTotalElements());
+
+            model.addAttribute("posts", postsPageWithAuthorFlag);
+            model.addAttribute("principal", userDetails);
         }
 
-        if (pageable.getPageNumber() == 0) {
-            return "image/story";  // 첫 페이지일 때 전체 페이지 반환
-        } else {
-            return "image/story :: #storyList";  // 부분 업데이트를 위한 fragment 반환
-        }
+        // principal과 게시글 Author가 같다면 ... 버튼 활성화.
+
+        return "image/story";
+
     }
 
     // 참고한 코드는 그냥  url 요청하면 자동으로 userDetail이 넘어가던데,,,, 참고한 코드 작동원리를 다시 살펴보기/
@@ -77,7 +95,7 @@ public class PostsController {
         //application.yml 파일 사용 시 사용. file 경로를 지정하면,,,  난 일단 그냥 String으로 경로를 고정시켜둠.
         /*@Value("${file.path}")
         private String uploadFolder;*/
-        String uploadFolder = "C:/Users/JOOSE/Documents/sns_project/src/main/resources/static/upload/";
+        String uploadFolder = "C:/sns_project/src/main/resources/static/upload/";
 
         UUID uuid = UUID.randomUUID(); // uuid
         String imageFileName = uuid+"_"+postsDto.getFile().getOriginalFilename(); // 1.jpg
