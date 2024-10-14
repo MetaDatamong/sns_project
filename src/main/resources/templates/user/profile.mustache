@@ -2,22 +2,22 @@
 
 <main class="profile-container">
     <section class="profile-header">
-        {{#principal}}
+        {{#user}}
         <div class="profile-image">
-            <img src="/images/person.jpeg" alt="{{user.username}}의 프로필 이미지">
+            <img src="/images/person.jpeg" alt="{{username}}의 프로필 이미지">
         </div>
         <div class="profile-info">
-            <h1 class="profile-username">{{user.username}}</h1>
+            <h1 class="profile-username">{{username}}</h1>
             <div class="profile-stats">
                 <span>게시물 <strong>1</strong></span>
                 <span>친구 <strong>116</strong></span>
             </div>
-            <p class="profile-fullname">{{user.nickname}}</p>
-            <p class="profile-bio">??</p>
+            <p class="profile-fullname">{{nickname}}</p>
+            <p class="profile-bio"></p>
                 <button class="profile-edit-btn">프로필 편집</button>
                 <button class="profile-follow-btn" onclick="location.href='/logout'" >로그아웃</button>
         </div>
-        {{/principal}}
+        {{/user}}
     </section>
 
     <nav class="profile-nav">

@@ -32,9 +32,9 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom {
                 .selectFrom(posts)
                 .where(posts.user.userId.in(
                         JPAExpressions
-                                .select(friend.userFriendId)
+                                .select(friend.following)
                                 .from(friend)
-                                .where(friend.userId.eq(principalId).and(posts.sharingScope.in("PUBLIC","FRIENDS_ONLY")))
+                                .where(friend.follower.eq(principalId).and(posts.sharingScope.in("PUBLIC","FRIENDS_ONLY")))
                 ).or(posts.user.userId.eq(principalId))
                 )
                 .orderBy(posts.postingId.desc())
@@ -47,9 +47,9 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom {
                 .from(posts)
                 .where(posts.user.userId.in(
                         JPAExpressions
-                                .select(friend.userFriendId)
+                                .select(friend.following)
                                 .from(friend)
-                                .where(friend.userId.eq(principalId))
+                                .where(friend.follower.eq(principalId))
                 ).or(posts.user.userId.eq(principalId))
                 )
                 .fetchOne();

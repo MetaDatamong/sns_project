@@ -37,12 +37,12 @@ function togglePostOptions(button) {
 	dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
 }
 
-function deletePost(postId) {
+function deletePost(postingId) {
 	if (confirm('정말로 이 게시물을 삭제하시겠습니까?')) {
 		// 서버에 삭제 요청을 보내는 form을 생성하고 제출
 		let form = document.createElement('form');
-		form.method = 'POST';
-		form.action = `/post/${postId}/delete`;
+		form.method = 'GET';
+		form.action = `/posting/${postingId}/delete`;
 		document.body.appendChild(form);
 		form.submit();
 	}

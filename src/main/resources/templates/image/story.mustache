@@ -15,7 +15,7 @@
                             <div class="post-options">
                                 <button class="post-options-button">...</button>
                                 <div class="post-options-dropdown" style="display: none;">
-                                    <a href="/post/{{post.postingId}}/edit" class="dropdown-item">수정</a>
+                                    <a href="/posting/{{post.postingId}}/update" class="dropdown-item">수정</a>
                                     <a href="#" onclick="deletePost({{post.postingId}})" class="dropdown-item">삭제</a>
                                 </div>
                             </div>
@@ -70,3 +70,6 @@
 {{/posts.hasNext}}
 
 <script src="/js/story.js"></script>
+
+<script src="/js/sidebar.js"></script>
+{{> layout/sidebar}}

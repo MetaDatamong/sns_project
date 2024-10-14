@@ -16,11 +16,10 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -86,7 +85,7 @@ public class PostsController {
     }
 
     @PostMapping("/posting")
-    public String imageUpload(PostsDto postsDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public String uploadPosting(PostsDto postsDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
         // 깍둑이
         if(postsDto.getFile().isEmpty()) {
@@ -114,6 +113,32 @@ public class PostsController {
         Posts  posts = postsDto.toEntity(imageFileName, principalDetails.getUser()); // 5cf6237d-c404-43e5-836b-e55413ed0e49_bag.jpeg
         postsRepository.save(posts);
         return "redirect:/";
+    }
+
+
+    @GetMapping("/posting/{postingId}/delete")
+    public String deletePosting(@PathVariable Long postingId, RedirectAttributes rttr) {
+
+        Posts posts = postsRepository.findById(postingId).orElse(null);
+
+        if (posts != null) {
+            postsRepository.deleteById(postingId);
+            //리다이렉트시 한번만 등록하는 메서드
+            rttr.addFlashAttribute("message", "Delete Success!!");
+        }
+
+        return "redirect:/posting";
+    }
+
+    @GetMapping("/posting/{postingId}/update")
+    public String updatePosting(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long postingId, Model model) {
+
+        model.addAttribute("principal", userDetails);
+        Posts posts = postsRepository.findById(postingId).orElse(null);
+
+        model.addAttribute("posts", posts);
+
+        return "image/update";
     }
 
     /*    @GetMapping("/posting")

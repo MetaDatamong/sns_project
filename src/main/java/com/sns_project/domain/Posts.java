@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "your_entity_seq")
-    @SequenceGenerator(name = "your_entity_seq", sequenceName = "your_entity_sequence", allocationSize = 1, initialValue = 4)
+    @SequenceGenerator(name = "your_entity_seq", sequenceName = "your_entity_sequence", allocationSize = 1, initialValue = 9)
     private Long postingId;
 
     //private String title;

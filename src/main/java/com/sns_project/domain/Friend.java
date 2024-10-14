@@ -15,11 +15,11 @@ public class Friend {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long friendId;
 
-    @Column(name = "user_id")
-    private Long userId;
+    // 이 사람이 구독함
+    private Long follower;
 
-    @Column(name = "user_friend_id")
-    private Long userFriendId;
+    // 구독 당하는 사람
+    private Long following;
 
     private FriendStatus friendStatus;
 
