@@ -5,6 +5,7 @@ import com.sns_project.domain.Friend;
 import com.sns_project.domain.User;
 import com.sns_project.dto.FriendDto;
 import com.sns_project.dto.UserDto;
+import com.sns_project.repository.FriendRepository;
 import com.sns_project.repository.UserRepository;
 import com.sns_project.service.FriendService;
 import com.sns_project.service.UserService;
@@ -23,6 +24,9 @@ public class ApiController {
 
     private final UserService userService;
     private final FriendService friendService;
+
+    @Autowired
+    private FriendRepository friendRepository;
 
     @Autowired
     public ApiController(UserService userService, FriendService friendService) {
@@ -73,4 +77,9 @@ public class ApiController {
         }
     }
 
+    @GetMapping("/{userId}/followers")
+    public ResponseEntity<List<User>> getFollowers(@PathVariable Long userId) {
+        List<User> friendList = friendRepository.findFollowerByFollowingId(userId);
+        return ResponseEntity.ok(friendList);
+    }
 }
