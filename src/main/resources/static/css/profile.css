@@ -3,7 +3,7 @@ body {
 }
 
 .profile-container {
-  max-width: 100%;
+  max-width: 935px; /* 최대 너비 제한 */
   margin: 0 auto;
   padding: 60px 20px 30px; /* 상단 패딩 증가 */
 }
@@ -59,6 +59,7 @@ body {
 .profile-stats span {
   margin-right: 40px;
   margin-bottom: 10px;
+  cursor: pointer; /* 팔로워 수 클릭 가능하도록 */
 }
 
 .profile-fullname {
@@ -149,16 +150,104 @@ body {
   margin-right: 5px;
 }
 
+/* 모달 관련 스타일 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 12px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-search {
+  margin-bottom: 10px;
+}
+
+.modal-search input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+}
+
+#followerList {
+  list-style-type: none;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#followerList li {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+#followerList li:last-child {
+  border-bottom: none;
+}
+
+#followerList li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.follower-info {
+  flex-grow: 1;
+}
+
+.follower-username {
+  font-weight: bold;
+}
+
+.follower-name {
+  color: #8e8e8e;
+  font-size: 14px;
+}
+
+/* 반응형 디자인 */
 @media (max-width: 935px) {
   .profile-container {
-    padding: 40px 15px 20px; /* 패딩 조정 */
+    padding: 40px 15px 20px;
   }
 }
 
 @media (max-width: 768px) {
   .profile-posts-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px; /* 간격 줄임 */
+    gap: 15px;
   }
 
   .profile-header {
@@ -169,11 +258,15 @@ body {
 
   .profile-image {
     margin-right: 0;
-    border: white;
   }
 
   .profile-stats {
     justify-content: center;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 10% auto;
   }
 }
 
@@ -183,6 +276,20 @@ body {
   }
 
   .profile-container {
-    padding: 30px 10px 15px; /* 더 작은 화면에서 패딩 줄임 */
+    padding: 30px 10px 15px;
+  }
+
+  .modal-content {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #followerList {
+    flex-grow: 1;
+    overflow-y: auto;
   }
 }
