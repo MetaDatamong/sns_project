@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const compassButton = document.querySelector('.navi-item a i.far.fa-compass').closest('a');
+    const compassButton = document.querySelector('.navi-item a i.fas.fa-search').closest('a');
     const sidebar = document.getElementById('sidebar');
     const closeSidebarButton = document.getElementById('closeSidebar');
     const searchInput = document.getElementById('searchInput');

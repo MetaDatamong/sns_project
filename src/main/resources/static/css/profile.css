@@ -199,40 +199,40 @@ body {
   border-radius: 3px;
 }
 
-#followerList {
+#followerList, #followingList {
   list-style-type: none;
   padding: 0;
   max-height: 300px;
   overflow-y: auto;
 }
 
-#followerList li {
+#followerList li, #followingList li {
   display: flex;
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #dbdbdb;
 }
 
-#followerList li:last-child {
+#followerList li:last-child, #followingList li:last-child {
   border-bottom: none;
 }
 
-#followerList li img {
+#followerList li img, #followingList li img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
 }
 
-.follower-info {
+.follower-info, .following-info{
   flex-grow: 1;
 }
 
-.follower-username {
+.follower-username, .following-username {
   font-weight: bold;
 }
 
-.follower-name {
+.follower-name, .following-name {
   color: #8e8e8e;
   font-size: 14px;
 }
@@ -288,7 +288,7 @@ body {
     flex-direction: column;
   }
 
-  #followerList {
+  #followerList, #followingList {
     flex-grow: 1;
     overflow-y: auto;
   }

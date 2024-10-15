@@ -9,8 +9,8 @@
             <div class="profile-info">
                 <h1 class="profile-username">{{username}}</h1>
                 <div class="profile-stats">
-                    <span id="followerCount" style="cursor: pointer;">Follower <strong>80</strong></span>
-                    <span>Following <strong>116</strong></span>
+                    <span id="followerCount" style="cursor: pointer;">Follower <strong>{{#userInfo}}{{followerCnt}}{{/userInfo}}</strong></span>
+                    <span id="followingCount" style="cursor: pointer;">Following <strong>{{#userInfo}}{{followingCnt}}{{/userInfo}}</strong></span>
                 </div>
                 <p class="profile-fullname">{{nickname}}</p>
                 <p class="profile-bio"></p>
@@ -26,7 +26,7 @@
         {{/userInfo.user}}
     </section>
 
-    <!-- 모달 시작 -->
+    <!-- 팔로워 모달 시작 -->
     <div id="followerModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -34,7 +34,17 @@
             <ul id="followerList"></ul>
         </div>
     </div>
-    <!-- 모달 끝 -->
+    <!-- 팔로워 모달 끝 -->
+
+    <!-- following 모달창 시작 -->
+    <div id="followingModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>팔로잉</h2>
+            <ul id="followingList"></ul>
+        </div>
+    </div>
+    <!-- following 모달창 끝 -->
 
     <nav class="profile-nav">
         <a href="#" class="active">게시물</a>

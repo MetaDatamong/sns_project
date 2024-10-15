@@ -82,4 +82,10 @@ public class ApiController {
         List<User> friendList = friendRepository.findFollowerByFollowingId(userId);
         return ResponseEntity.ok(friendList);
     }
+
+    @GetMapping("/{userId}/followings")
+    public ResponseEntity<List<User>> getFollowings(@PathVariable Long userId) {
+        List<User> friendList = friendRepository.findFollowingByFollowingId(userId);
+        return ResponseEntity.ok(friendList);
+    }
 }

@@ -31,12 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 
-	// 모달 관련 코드 시작
+	// 팔로워 모달 관련 코드 시작
 	const followerCount = document.getElementById('followerCount');
-	const modal = document.getElementById('followerModal');
-	const closeBtn = document.getElementsByClassName('close')[0];
+	const followerModal = document.getElementById('followerModal');
+	const followerCloseBtn = followerModal.querySelector('.close');
 	const followerList = document.getElementById('followerList');
-	const followerSearch = document.getElementById('followerSearch');
 
 	followerCount.addEventListener('click', function() {
 		fetch(`/api/${userId}/followers`)
@@ -54,19 +53,54 @@ document.addEventListener('DOMContentLoaded', function() {
                     `;
 					followerList.appendChild(li);
 				});
-				modal.style.display = 'block';
+				followerModal.style.display = 'block';
 			})
 			.catch(error => console.error('Error:', error));
 	});
 
-	closeBtn.onclick = function() {
-		modal.style.display = 'none';
+	followerCloseBtn.onclick = function() {
+		followerModal.style.display = 'none';
 	}
+	// 팔로워 모달 관련 코드 끝
+
+	// following 모달창 관련 코드 시작
+	const followingCount = document.getElementById('followingCount');
+	const followingModal = document.getElementById('followingModal');
+	const followingCloseBtn = followingModal.querySelector('.close');
+	const followingList = document.getElementById('followingList');
+
+	followingCount.addEventListener('click', function() {
+		fetch(`/api/${userId}/followings`)
+			.then(response => response.json())
+			.then(data => {
+				followingList.innerHTML = '';
+				data.forEach(following => {
+					const li = document.createElement('li');
+					li.innerHTML = `
+                        <img src="/images/person.jpeg" alt="${following.username}'s profile">
+                        <div class="following-info">
+                            <div class="following-username">${following.username}</div>
+                            <div class="following-name">${following.nickname}</div>
+                        </div>
+                    `;
+					followingList.appendChild(li);
+				});
+				followingModal.style.display = 'block';
+			})
+			.catch(error => console.error('Error:', error));
+	});
+
+	followingCloseBtn.onclick = function() {
+		followingModal.style.display = 'none';
+	}
+	// following 모달창 관련 코드 끝
 
 	window.onclick = function(event) {
-		if (event.target == modal) {
-			modal.style.display = 'none';
+		if (event.target == followerModal) {
+			followerModal.style.display = 'none';
+		}
+		if (event.target == followingModal) {
+			followingModal.style.display = 'none';
 		}
 	}
-	// 모달 관련 코드 끝
 });
