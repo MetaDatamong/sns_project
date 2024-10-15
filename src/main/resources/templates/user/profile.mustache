@@ -2,22 +2,28 @@
 
 <main class="profile-container">
     <section class="profile-header">
-        {{#user}}
-        <div class="profile-image">
-            <img src="/images/person.jpeg" alt="{{username}}의 프로필 이미지">
-        </div>
-        <div class="profile-info">
-            <h1 class="profile-username">{{username}}</h1>
-            <div class="profile-stats">
-                <span>게시물 <strong>1</strong></span>
-                <span>친구 <strong>116</strong></span>
+        {{#userInfo.user}}
+            <div class="profile-image">
+                <img src="/images/person.jpeg" alt="{{username}}의 프로필 이미지">
             </div>
-            <p class="profile-fullname">{{nickname}}</p>
-            <p class="profile-bio"></p>
-                <button class="profile-edit-btn">프로필 편집</button>
-                <button class="profile-follow-btn" onclick="location.href='/logout'" >로그아웃</button>
-        </div>
-        {{/user}}
+            <div class="profile-info">
+                <h1 class="profile-username">{{username}}</h1>
+                <div class="profile-stats">
+                    <span>Follower <strong>80</strong></span>
+                    <span>Following <strong>116</strong></span>
+                </div>
+                <p class="profile-fullname">{{nickname}}</p>
+                <p class="profile-bio"></p>
+                {{#userInfo.isOwner}}
+                    <button class="profile-edit-btn">프로필 편집</button>
+                    <button class="profile-logout-btn" onclick="location.href='/logout'">로그아웃</button>
+                {{/userInfo.isOwner}}
+                {{^userInfo.isOwner}}
+                    <button class="profile-follow-btn" id="followBtn">팔로우</button>
+                    <button class="profile-unfollow-btn" id="unfollowBtn" style="display: none;">언팔로우</button>
+                {{/userInfo.isOwner}}
+            </div>
+        {{/userInfo.user}}
     </section>
 
     <nav class="profile-nav">
@@ -40,3 +46,24 @@
 </main>
 
 {{> layout/footer}}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const followBtn = document.getElementById('followBtn');
+        const unfollowBtn = document.getElementById('unfollowBtn');
+
+        if (followBtn && unfollowBtn) {
+            followBtn.addEventListener('click', function() {
+                followBtn.style.display = 'none';
+                unfollowBtn.style.display = 'inline-block';
+                // 여기에 팔로우 API 호출 로직을 추가할 수 있습니다.
+            });
+
+            unfollowBtn.addEventListener('click', function() {
+                unfollowBtn.style.display = 'none';
+                followBtn.style.display = 'inline-block';
+                // 여기에 언팔로우 API 호출 로직을 추가할 수 있습니다.
+            });
+        }
+    });
+</script>

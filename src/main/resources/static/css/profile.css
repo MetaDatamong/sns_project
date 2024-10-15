@@ -71,7 +71,7 @@ body {
   word-break: break-word; /* 긴 소개글 처리 */
 }
 
-.profile-edit-btn, .profile-follow-btn {
+.profile-edit-btn, .profile-follow-btn, .profile-logout-btn, .profile-unfollow-btn {
   background-color: #0095f6;
   color: white;
   border: none;
