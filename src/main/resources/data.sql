@@ -4,18 +4,52 @@ INSERT INTO users (user_id, birthday, nickname, password, role, sex, username)
 VALUES
     (1, '1990-01-01', 'gurumi', '$2a$10$9O.xSaZ4AV.CGqEsX2BDquz2bU7ADypJrR5Nd2OmJYeQDnFSlWJWi', 'ROLE_USER', '남성', 'user1'),
     (2, '1992-05-15', 'bassMaster', '$2a$10$crs62DcQkddEO.JfnBHEl.hru/huw15oM5WOj5qAL65Dns.UfPsYa', 'ROLE_USER', '여성', 'user2'),
-    (3, '1988-11-30', 'vitamin', '$2a$10$riXcMcUBKGVHopHUPy0LoerWgAiAk7nw9q6jzljqOaetAkunZSBq.', 'ROLE_USER', '남성', 'user3');
+    (3, '1988-11-30', 'vitamin', '$2a$10$riXcMcUBKGVHopHUPy0LoerWgAiAk7nw9q6jzljqOaetAkunZSBq.', 'ROLE_USER', '남성', 'user3'),
+    (4, '1995-03-22', 'bluesky', '$2a$10$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ12', 'ROLE_USER', '여성', 'user4'),
+    (5, '1987-09-10', 'greenleaf', '$2a$10$bcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123', 'ROLE_USER', '남성', 'user5'),
+    (6, '1993-12-05', 'redapple', '$2a$10$cdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234', 'ROLE_USER', '여성', 'user6'),
+    (7, '1991-06-18', 'purplegrape', '$2a$10$defghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ12345', 'ROLE_USER', '남성', 'user7'),
+    (8, '1989-02-14', 'yellowsun', '$2a$10$efghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456', 'ROLE_USER', '여성', 'user8'),
+    (9, '1994-08-30', 'orangejuice', '$2a$10$fghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567', 'ROLE_USER', '남성', 'user9'),
+    (10, '1986-11-11', 'blackcoffee', '$2a$10$ghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ12345678', 'ROLE_USER', '여성', 'user10'),
+    (11, '1997-04-25', 'whitesnow', '$2a$10$hijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789', 'ROLE_USER', '남성', 'user11'),
+    (12, '1992-07-07', 'graystorm', '$2a$10$ijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', 'ROLE_USER', '여성', 'user12'),
+    (13, '1988-01-01', 'brownearth', '$2a$10$jklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ12345678901', 'ROLE_USER', '남성', 'user13');
 
 
 -- Friend 테이블 데이터
-/*INSERT INTO friend (friend_id, follower, following)
+INSERT INTO friend (friend_id, follower, following)
 VALUES
-    (1, 1, 2),  -- 사용자 1과 사용자 2는 친구
-    (2, 1, 3);  -- 사용자 2와 사용자 1은 친구 (양방향 관계)*/
-/*    (3, 1, 3, 1),  -- 사용자 1과 사용자 3은 친구
-    (4, 1, 1, 3);  -- 사용자 3과 사용자 1은 친구 (양방향 관계)*/
+    (1, 13, 2),  -- 사용자 1과 사용자 2는 친구
+    (2, 1, 3),
+    (3, 1, 5),  -- user1 follows user5
+    (4, 1, 8),  -- user1 follows user8
+    (5, 2, 1),  -- user2 follows user1
+    (6, 2, 3),  -- user2 follows user3
+    (7, 2, 7),  -- user2 follows user7
+    (8, 3, 4),  -- user3 follows user4
+    (9, 3, 6),  -- user3 follows user6
+    (10, 4, 1),  -- user4 follows user1
+    (11, 4, 5), -- user4 follows user5
+    (12, 5, 2), -- user5 follows user2
+    (13, 5, 9), -- user5 follows user9
+    (14, 6, 3), -- user6 follows user3
+    (15, 6, 10),-- user6 follows user10
+    (16, 7, 1), -- user7 follows user1
+    (17, 7, 8), -- user7 follows user8
+    (18, 8, 2), -- user8 follows user2
+    (19, 8, 11),-- user8 follows user11
+    (20, 9, 3), -- user9 follows user3
+    (21, 9, 12),-- user9 follows user12
+    (22, 10, 4),-- user10 follows user4
+    (23, 10, 7),-- user10 follows user7
+    (24, 11, 5),-- user11 follows user5
+    (25, 11, 13),-- user11 follows user13
+    (26, 12, 6),-- user12 follows user6
+    (27, 12, 9),-- user12 follows user9
+    (28, 13, 1),-- user13 follows user1
+    (29, 13, 10);-- user13 follows user10
 
--- posts 테이블 데이터
 
 INSERT INTO posts (posting_id, content, date_time, post_image_url, sharing_scope, author)
 VALUES

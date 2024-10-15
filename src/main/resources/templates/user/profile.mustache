@@ -1,6 +1,6 @@
 {{> layout/header}}
 
-<main class="profile-container">
+<main class="profile-container" data-user-id="{{userInfo.user.userId}}">
     <section class="profile-header">
         {{#userInfo.user}}
             <div class="profile-image">
@@ -9,7 +9,7 @@
             <div class="profile-info">
                 <h1 class="profile-username">{{username}}</h1>
                 <div class="profile-stats">
-                    <span>Follower <strong>80</strong></span>
+                    <span id="followerCount" style="cursor: pointer;">Follower <strong>80</strong></span>
                     <span>Following <strong>116</strong></span>
                 </div>
                 <p class="profile-fullname">{{nickname}}</p>
@@ -47,38 +47,4 @@
 
 {{> layout/footer}}
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const followBtn = document.getElementById('followBtn');
-        const unfollowBtn = document.getElementById('unfollowBtn');
-        const userId = {{userInfo.user.userId}};/* 여기에 현재 프로필의 사용자 ID를 설정 */;
-
-        if (followBtn && unfollowBtn) {
-            followBtn.addEventListener('click', function() {
-                fetch(`/api/follow/${userId}`, {
-                    method: 'POST',
-                    credentials: 'same-origin'
-                })
-                        .then(response => response.json())
-                        .then(data => {
-                            followBtn.style.display = 'none';
-                            unfollowBtn.style.display = 'inline-block';
-                        })
-                        .catch(error => console.error('Error:', error));
-            });
-
-            unfollowBtn.addEventListener('click', function() {
-                fetch(`/api/unfollow/${userId}`, {
-                    method: 'POST',
-                    credentials: 'same-origin'
-                })
-                        .then(response => response.json())
-                        .then(data => {
-                            unfollowBtn.style.display = 'none';
-                            followBtn.style.display = 'inline-block';
-                        })
-                        .catch(error => console.error('Error:', error));
-            });
-        }
-    });
-</script>
+<script src="/js/profile.js"></script>

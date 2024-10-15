@@ -13,7 +13,7 @@ public class Friend {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "friendId_seq")
-    @SequenceGenerator(name = "friendId_seq", sequenceName = "friendId_seq", allocationSize = 1, initialValue = 4)
+    @SequenceGenerator(name = "friendId_seq", sequenceName = "friendId_seq", allocationSize = 1, initialValue = 30)
     private Long friendId;
 
     // 이 사람이 구독함
