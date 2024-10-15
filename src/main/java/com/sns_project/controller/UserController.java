@@ -1,10 +1,13 @@
 package com.sns_project.controller;
 
 import com.sns_project.config.auth.PrincipalDetails;
+import com.sns_project.domain.Posts;
 import com.sns_project.domain.User;
 import com.sns_project.repository.FriendRepository;
+import com.sns_project.repository.PostsRepository;
 import com.sns_project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,9 @@ public class UserController {
 
     @Autowired
     private FriendRepository friendRepository;
+
+    @Autowired
+    private PostsRepository postsRepository;
 
     @GetMapping("/user/{userId}")
     public String getProfile(@AuthenticationPrincipal PrincipalDetails userDetails, @PathVariable Long userId, Model model) {
@@ -55,6 +61,10 @@ public class UserController {
         userInfo.put("followingCnt", followingCnt);
 
         model.addAttribute("userInfo", userInfo);
+
+        List<Posts> posts = postsRepository.findAllByUserUserId(userId);
+
+        model.addAttribute("posts", posts);
 
         return "user/profile";
     }
