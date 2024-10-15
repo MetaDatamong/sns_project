@@ -2,16 +2,16 @@
 
 INSERT INTO users (user_id, birthday, nickname, password, role, sex, username)
 VALUES
-    (1, '1990-01-01', 'gurumi', '$2a$10$9O.xSaZ4AV.CGqEsX2BDquz2bU7ADypJrR5Nd2OmJYeQDnFSlWJWi', 'USER', '남성', 'user1'),
-    (2, '1992-05-15', 'bassMaster', '$2a$10$crs62DcQkddEO.JfnBHEl.hru/huw15oM5WOj5qAL65Dns.UfPsYa', 'USER', '여성', 'user2'),
-    (3, '1988-11-30', 'vitamin', '$2a$10$riXcMcUBKGVHopHUPy0LoerWgAiAk7nw9q6jzljqOaetAkunZSBq.', 'USER', '남성', 'user3');
+    (1, '1990-01-01', 'gurumi', '$2a$10$9O.xSaZ4AV.CGqEsX2BDquz2bU7ADypJrR5Nd2OmJYeQDnFSlWJWi', 'ROLE_USER', '남성', 'user1'),
+    (2, '1992-05-15', 'bassMaster', '$2a$10$crs62DcQkddEO.JfnBHEl.hru/huw15oM5WOj5qAL65Dns.UfPsYa', 'ROLE_USER', '여성', 'user2'),
+    (3, '1988-11-30', 'vitamin', '$2a$10$riXcMcUBKGVHopHUPy0LoerWgAiAk7nw9q6jzljqOaetAkunZSBq.', 'ROLE_USER', '남성', 'user3');
 
 
 -- Friend 테이블 데이터
-INSERT INTO friend (friend_id, follower, following)
+/*INSERT INTO friend (friend_id, follower, following)
 VALUES
     (1, 1, 2),  -- 사용자 1과 사용자 2는 친구
-    (2, 1, 3);  -- 사용자 2와 사용자 1은 친구 (양방향 관계)
+    (2, 1, 3);  -- 사용자 2와 사용자 1은 친구 (양방향 관계)*/
 /*    (3, 1, 3, 1),  -- 사용자 1과 사용자 3은 친구
     (4, 1, 1, 3);  -- 사용자 3과 사용자 1은 친구 (양방향 관계)*/
 

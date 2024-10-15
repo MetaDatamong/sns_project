@@ -98,7 +98,7 @@ public class PostsController {
 
         UUID uuid = UUID.randomUUID(); // uuid
         String imageFileName = uuid+"_"+postsDto.getFile().getOriginalFilename(); // 1.jpg
-        System.out.println("이미지 파일이름 : "+imageFileName);
+        //System.out.println("이미지 파일이름 : "+imageFileName);
 
         Path imageFilePath = Paths.get(uploadFolder+imageFileName);
 

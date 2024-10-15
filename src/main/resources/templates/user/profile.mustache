@@ -51,18 +51,33 @@
     document.addEventListener('DOMContentLoaded', function() {
         const followBtn = document.getElementById('followBtn');
         const unfollowBtn = document.getElementById('unfollowBtn');
+        const userId = {{userInfo.user.userId}};/* 여기에 현재 프로필의 사용자 ID를 설정 */;
 
         if (followBtn && unfollowBtn) {
             followBtn.addEventListener('click', function() {
-                followBtn.style.display = 'none';
-                unfollowBtn.style.display = 'inline-block';
-                // 여기에 팔로우 API 호출 로직을 추가할 수 있습니다.
+                fetch(`/api/follow/${userId}`, {
+                    method: 'POST',
+                    credentials: 'same-origin'
+                })
+                        .then(response => response.json())
+                        .then(data => {
+                            followBtn.style.display = 'none';
+                            unfollowBtn.style.display = 'inline-block';
+                        })
+                        .catch(error => console.error('Error:', error));
             });
 
             unfollowBtn.addEventListener('click', function() {
-                unfollowBtn.style.display = 'none';
-                followBtn.style.display = 'inline-block';
-                // 여기에 언팔로우 API 호출 로직을 추가할 수 있습니다.
+                fetch(`/api/unfollow/${userId}`, {
+                    method: 'POST',
+                    credentials: 'same-origin'
+                })
+                        .then(response => response.json())
+                        .then(data => {
+                            unfollowBtn.style.display = 'none';
+                            followBtn.style.display = 'inline-block';
+                        })
+                        .catch(error => console.error('Error:', error));
             });
         }
     });

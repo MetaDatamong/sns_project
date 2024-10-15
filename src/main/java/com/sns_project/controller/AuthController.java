@@ -35,7 +35,7 @@ public class AuthController {
         // User < - SignupDto
         User user = signupDto.toEntity();
         authService.singUp(user);
-        System.out.println(user);
+/*        System.out.println(user);*/
 
         // 로그를 남기는 후처리!!
         return "auth/signin";

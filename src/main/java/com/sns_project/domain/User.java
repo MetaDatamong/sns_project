@@ -13,7 +13,8 @@ import lombok.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userId_seq")
+    @SequenceGenerator(name = "userId_seq", sequenceName = "userId_seq", allocationSize = 1, initialValue = 4)
     private Long userId;
 
     @Column(unique = true, length = 20)
